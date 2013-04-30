@@ -27,7 +27,9 @@ module Pushapp
 
     def list_remotes
       logger.info "Known remotes:"
-      logger.shell.print_table config.remotes.map {|r| [r.full_name, r.location, r.env]}
+      remotes_table = config.remotes.map {|r| [r.full_name, r.location, r.env]}
+      remotes_table.unshift ['Full Name', 'Location', 'ENV']
+      logger.shell.print_table(remotes_table)
     end
 
     def setup
