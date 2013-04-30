@@ -5,6 +5,7 @@ module Pushapp
     class ForemanExport < Base
 
       def run
+
       end
 
       register_as :foreman_export

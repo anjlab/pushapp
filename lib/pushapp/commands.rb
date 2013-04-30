@@ -46,11 +46,12 @@ module Pushapp
 
     def trigger
       event = @options[:event]
-      if @options[:local]
-        shell = Pushapp::Shell.new
+      local = @options[:local]
+      if local
         remotes.each do |r|
           r.tasks_on(event).each do |t|
-            shell.run(t)
+            puts "[pushapp] run: #{t.inspect}"
+            Pipe.run(t)
           end
         end
       else

@@ -5,7 +5,7 @@ module Pushapp
   autoload :CLI,      'pushapp/cli'
   autoload :Config,   'pushapp/config'
   autoload :Commands, 'pushapp/commands'
-  autoload :Shell,    'pushapp/shell'
+  autoload :Pipe,    'pushapp/pipe'
   autoload :Remote,   'pushapp/remote'
   autoload :Hook,     'pushapp/hook'
   autoload :Git,      'pushapp/git'

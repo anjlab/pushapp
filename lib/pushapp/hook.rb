@@ -32,7 +32,6 @@ module Pushapp
       @remote  = remote      
       @config  = remote.config
       @options = remote.options
-      @shell   = Pushapp::Shell.new
 
       @remote_index = @config.remotes.index(@remote)
       @remote_color = ANSI_COLORS[HOOK_COLORS[@remote_index % HOOK_COLORS.length].to_sym]
@@ -113,9 +112,9 @@ module Pushapp
       # debug "Making hook executable"
       # TODO: handle missing user?
       if @remote.host
-        @shell.run "scp #{Pushapp::TMP_HOOK} #{@remote.user}@#{@remote.host}:#{@remote.path}/.git/hooks/post-receive"
+        Pipe.run "scp #{Pushapp::TMP_HOOK} #{@remote.user}@#{@remote.host}:#{@remote.path}/.git/hooks/post-receive"
       else
-        @shell.run "cp #{Pushapp::TMP_HOOK} #{@remote.path}/.git/hooks/post-receive"
+        Pipe.run "cp #{Pushapp::TMP_HOOK} #{@remote.path}/.git/hooks/post-receive"
       end
     end
 

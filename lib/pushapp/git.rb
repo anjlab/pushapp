@@ -1,11 +1,6 @@
-require 'pushapp/shell'
-
 module Pushapp
 
   class Git
-    def initialize
-      @shell = Pushapp::Shell.new
-    end
 
     def update_tracked_repos config
       refs         = required_refs(config)
@@ -15,11 +10,11 @@ module Pushapp
       old_refs    = old_refs(refs, current_refs)
 
       new_refs.each do |r|
-        @shell.run("git config --add remote.#{r[0]}.url #{r[1]}")  
+        Pipe.run("git config --add remote.#{r[0]}.url #{r[1]}")  
       end
 
       old_refs.each do |r|
-        @shell.run("git config --unset remote.#{r[0]}.url #{r[1]}")  
+        Pipe.run("git config --unset remote.#{r[0]}.url #{r[1]}")  
       end      
     end
 
@@ -38,7 +33,7 @@ module Pushapp
     end
 
     def current_refs config
-      output = @shell.capture('git remote -v')
+      output = Pipe.capture('git remote -v')
 
       refs     = required_refs(config)
       remotes  = refs.map {|r| r[0]}.uniq

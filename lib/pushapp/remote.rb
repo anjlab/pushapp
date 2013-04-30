@@ -89,11 +89,10 @@ class Pushapp::Remote
   end
 
   def run cmd
-    shell = Pushapp::Shell.new
     if host
-      shell.run "ssh #{user}@#{host} '#{cmd}'"
+      Pipe.run "ssh #{user}@#{host} '#{cmd}'"
     else
-      shell.run cmd
+      Pipe.run cmd
     end
   end
 

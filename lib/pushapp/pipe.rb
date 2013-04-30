@@ -2,8 +2,9 @@ require 'open3'
 require 'stringio'
 
 module Pushapp
-  class Shell
-    def run(command)
+  class Pipe
+
+    def self.run(command)
       case command
       when String
         pipe(command)
@@ -18,7 +19,7 @@ module Pushapp
       end
     end
 
-    def capture(cmd)
+    def self.capture(cmd)
       output, s = Open3.capture2e(cmd)
       raise "Failed with status #{s.exitstatus}: #{cmd.inspect}" unless s.success?
       output
@@ -26,7 +27,7 @@ module Pushapp
 
     private
 
-    def pipe cmd, stdin=$stdin, stdout=$stdout
+    def self.pipe cmd, stdin=$stdin, stdout=$stdout
       s = Open3.pipeline(cmd, :in => stdin, :out => stdout).last
       raise "Failed with status #{s.exitstatus}: #{cmd.inspect}" unless s.success?
     end

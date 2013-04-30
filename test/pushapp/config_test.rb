@@ -57,11 +57,11 @@ class ConfigTest < MiniTest::Unit::TestCase
     @config.remote :dev, 'app@host:/home/app/app-dev'
     @config.remote :prod, 'app@host:/home/app/app-prod'
 
-    @config.setup do
+    @config.on :setup do
       rake 'db:create db:migrate db:seed'      
     end
 
-    @config.update do
+    @config.on :update do
       rake 'assets_precompile', env: {rails_group: 'assets'}
       task :foreman_export
     end
@@ -69,14 +69,14 @@ class ConfigTest < MiniTest::Unit::TestCase
     dev  = @config.remotes_named_by(:dev).first
     prod = @config.remotes_named_by(:prod).first
 
-    assert_equal 1, dev.task_list(:setup).length
-    assert_equal 1, prod.task_list(:setup).length
+    assert_equal 1, dev.tasks_on(:setup).length
+    assert_equal 1, prod.tasks_on(:setup).length
 
-    assert_equal 2, dev.task_list(:update).length
-    assert_equal 2, prod.task_list(:update).length
+    assert_equal 2, dev.tasks_on(:update).length
+    assert_equal 2, prod.tasks_on(:update).length
 
-    assert_equal 0, dev.task_list(:push).length
-    assert_equal 0, prod.task_list(:push).length
+    assert_equal 0, dev.tasks_on(:push).length
+    assert_equal 0, prod.tasks_on(:push).length
   end
 end
 
