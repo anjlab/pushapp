@@ -1,0 +1,30 @@
+# Pushapp Configuration File
+
+# Sample remote definition:
+#
+#   remote <remote_name>, <app_location>, [options]
+#
+# The options provided in the target definition will override any
+# options provided in the task call.
+#
+# You can specify multiple remotes in groups
+#
+# group(:production, env: {RAILS_ENV: 'production'})do
+#   remote :web, 'app@server1:/home/app/app',
+#     web: true, db: true
+#
+#   remote :worker, 'app@server2:/home/app/app',
+#     worker: true
+# end
+
+remote 'staging', 'app@server3:/home/app/app-staging',
+  web:true, db: true, env: {RAILS_ENV: 'staging'}
+
+on :setup do
+  rake('db:create db:migrate db:seed') if options[:db]
+end
+
+on :push do
+  rake('db:migrate') if options[:db]
+  rake('precompile:assets', env: {RAILS_GROUP: :assets}) if options[:web]
+end
