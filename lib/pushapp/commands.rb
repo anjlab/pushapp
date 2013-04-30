@@ -25,6 +25,11 @@ module Pushapp
       Pushapp::Git.new.update_tracked_repos(config)
     end
 
+    def list_remotes
+      logger.info "Known remotes:"
+      logger.shell.print_table config.remotes.map {|r| [r.full_name, r.location, r.env]}
+    end
+
     def setup
       logger.info "Setting up remotes"
       remotes.each { |r| r.setup! }

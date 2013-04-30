@@ -108,6 +108,10 @@ class Pushapp::Remote
     end
   end
 
+  def env
+    (options[:env] || {})
+  end
+
   private
 
   #
@@ -127,7 +131,7 @@ class Pushapp::Remote
   end
 
   def shell_env
-    (options[:env] || {}).map {|k,v| "#{k}=\"#{Shellwords.escape(v)}\""}.join(" ")
+    env.map {|k,v| "#{k}=\"#{Shellwords.escape(v)}\""}.join(" ")
   end
 
   def merge_options task_options={}

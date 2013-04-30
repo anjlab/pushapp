@@ -3,6 +3,8 @@ require 'thor'
 
 module Pushapp
   class Logger < ::Logger
+    attr_reader :shell
+
     def initialize
       super($stdout)
       @shell = Thor::Shell::Color.new

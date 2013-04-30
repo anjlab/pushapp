@@ -36,6 +36,14 @@ module Pushapp
       Pushapp::Commands.run(:update, remotes: remotes, options: options)
     end
 
+    desc 'remotes', 'List all known remotes'
+
+    method_option :file, type: :string, aliases: '-f', banner: 'Specify a configuration file'
+
+    def remotes
+      Pushapp::Commands.run(:list_remotes, options: options)
+    end
+
     desc 'tasks REMOTES', 'Show tasks list for remote(s). Default: all'
 
     def tasks(*remotes)
