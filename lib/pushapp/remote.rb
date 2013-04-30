@@ -124,7 +124,7 @@ class Pushapp::Remote
   #
   def setup_repository
     "cd #{path} && git config receive.denyCurrentBranch ignore"
-  end    
+  end
 
   def shell_env
     (options[:env] || {}).map {|k,v| "#{k}=\"#{Shellwords.escape(v)}\""}.join(" ")
@@ -132,6 +132,6 @@ class Pushapp::Remote
 
   def merge_options task_options={}
     Pushapp.rmerge(task_options, options).merge(remote: name)
-  end  
+  end
 
 end
