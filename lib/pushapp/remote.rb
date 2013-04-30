@@ -82,7 +82,7 @@ class Pushapp::Remote
 
   def exec cmd
     if host
-      Kernel.exec "ssh -t #{user}@#{host} '#{Shellwords.escape(cmd)}'"
+      Kernel.exec "ssh -t #{user}@#{host} '#{cmd}'"
     else
       Kernel.exec cmd
     end
@@ -90,7 +90,7 @@ class Pushapp::Remote
 
   def env_run cmd
     if host
-      Pushapp::Pipe.run "ssh #{user}@#{host} 'cd #{path} && #{shell_env} $SHELL -l \'#{Shellwords.escape(cmd)}\'"
+      Pushapp::Pipe.run "ssh #{user}@#{host} 'cd #{path} && #{shell_env} $SHELL -l -c \"#{cmd}\"'"
     else
       Bundler.with_original_env do
         Pushapp::Pipe.run "cd #{path} && #{shell_env} #{cmd}"
@@ -100,7 +100,7 @@ class Pushapp::Remote
 
   def run cmd
     if host
-      Pushapp::Pipe.run "ssh #{user}@#{host} '#{Shellwords.escape(cmd)}'"
+      Pushapp::Pipe.run "ssh #{user}@#{host} '#{cmd}'"
     else
       Bundler.with_original_env do
         Pushapp::Pipe.run cmd
