@@ -2,32 +2,37 @@ require 'erb'
 
 module Pushapp
   class Commands
+    attr_reader :logger
 
     def self.run(command, options = {})
       self.new(options.merge({ command: command })).send(command)
-    end    
+    end
 
     def initialize(options = {})
       @options = options
+      @logger = Pushapp::Logger.new
     end
 
     def init
-      # info "Creating an example config file in #{Pushapp::DEFAULT_CONFIG_LOCATION}"
-      # info "Customize it to your needs"
+      logger.info "Creating an example config file in #{Pushapp::DEFAULT_CONFIG_LOCATION}"
+      logger.info "Customize it to your needs"
       create_config_directory
       write_config_file
     end
 
     def update_refs
+      logger.info "Updating .git/config. Setting up refs to all remotes"
       Pushapp::Git.new.update_tracked_repos(config)
     end
 
     def setup
+      logger.info "Setting up remotes"
       remotes.each { |r| r.setup! }
       update
     end
 
     def update
+      logger.info "Updating remotes"
       remotes.each { |r| r.update! }
     end
 
@@ -50,20 +55,20 @@ module Pushapp
       if local
         remotes.each do |r|
           r.tasks_on(event).each do |t|
-            puts "[pushapp] run: #{t.inspect}"
-            Pipe.run(t)
+            logger.info "run: #{t.inspect}"
+            Pushapp::Pipe.run(t)
           end
         end
       else
-        remotes.each {|r| r.run "bundle exec pushapp trigger #{event} #{r.full_name} -l true"}
+        remotes.each {|r| r.env_run "bundle exec pushapp trigger #{event} #{r.full_name} -l true"}
       end
     end
 
     def ssh
       if remote
-        remote.ssh!   
+        remote.ssh!
       else
-        puts 'error'
+        logger.error 'Remote not found'
       end
     end
 

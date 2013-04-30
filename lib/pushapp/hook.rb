@@ -29,7 +29,7 @@ module Pushapp
     attr_accessor :remote
 
     def initialize(remote)
-      @remote  = remote      
+      @remote  = remote
       @config  = remote.config
       @options = remote.options
 
@@ -70,8 +70,8 @@ module Pushapp
       %{2>&1 | ruby -pe '$_="#{pre}#\{$_\}"'}
     end
 
-    def echo message
-      %{ruby -e 'puts "#{pre}\e[#{@echo_color}m#{message}\e[0m"'}
+    def info message
+      %{ruby -e 'puts "#{pre}\e[#{@echo_color}m\e[1m[pushapp]\e[0m\e[#{@echo_color}m INFO: #{message}\e[0m"'}
     end
 
     def load_template(template_name)
@@ -112,9 +112,9 @@ module Pushapp
       # debug "Making hook executable"
       # TODO: handle missing user?
       if @remote.host
-        Pipe.run "scp #{Pushapp::TMP_HOOK} #{@remote.user}@#{@remote.host}:#{@remote.path}/.git/hooks/post-receive"
+        Pushapp::Pipe.run "scp #{Pushapp::TMP_HOOK} #{@remote.user}@#{@remote.host}:#{@remote.path}/.git/hooks/post-receive"
       else
-        Pipe.run "cp #{Pushapp::TMP_HOOK} #{@remote.path}/.git/hooks/post-receive"
+        Pushapp::Pipe.run "cp #{Pushapp::TMP_HOOK} #{@remote.path}/.git/hooks/post-receive"
       end
     end
 

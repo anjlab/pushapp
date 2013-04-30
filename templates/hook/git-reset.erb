@@ -1,7 +1,7 @@
 while read oldrev newrev refname
 do
   # Reset so we dont have unstaged changes... and then checkout the pushed ref
-  <%= echo "[pushapp] Doing a hard reset and checking out #\{ARGV[0]\} since thats what you pushed" %> $refname
+  <%= info "Doing a hard reset and checking out #\{ARGV[0]\} since thats what you pushed" %> $refname
   git reset --hard HEAD <%= colorize %>
   git checkout $refname <%= colorize %>
 done

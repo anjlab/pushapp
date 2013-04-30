@@ -5,10 +5,11 @@ module Pushapp
   autoload :CLI,      'pushapp/cli'
   autoload :Config,   'pushapp/config'
   autoload :Commands, 'pushapp/commands'
-  autoload :Pipe,    'pushapp/pipe'
+  autoload :Pipe,     'pushapp/pipe'
   autoload :Remote,   'pushapp/remote'
   autoload :Hook,     'pushapp/hook'
   autoload :Git,      'pushapp/git'
+  autoload :Logger,   'pushapp/logger'
 
   module Tasks
     autoload :Base,   'pushapp/tasks/base'
@@ -21,7 +22,7 @@ module Pushapp
     r = {}
     a ||= {}
     b ||= {}
-    a = a.merge(b) do |key, oldval, newval| 
+    a = a.merge(b) do |key, oldval, newval|
       r[key] = (Hash === oldval ? rmerge(oldval, newval) : newval)
     end
     a.merge(r)

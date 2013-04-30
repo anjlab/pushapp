@@ -10,12 +10,12 @@ module Pushapp
       old_refs    = old_refs(refs, current_refs)
 
       new_refs.each do |r|
-        Pipe.run("git config --add remote.#{r[0]}.url #{r[1]}")  
+        Pushapp::Pipe.run("git config --add remote.#{r[0]}.url #{r[1]}")
       end
 
       old_refs.each do |r|
-        Pipe.run("git config --unset remote.#{r[0]}.url #{r[1]}")  
-      end      
+        Pushapp::Pipe.run("git config --unset remote.#{r[0]}.url #{r[1]}")
+      end
     end
 
     private

@@ -63,7 +63,7 @@ class Pushapp::Remote
   end
 
   def ssh!
-    exec "cd #{path} && #{shell_env} $SHELL -l"    
+    exec "cd #{path} && #{shell_env} $SHELL -l"
   end
 
   #
@@ -78,21 +78,33 @@ class Pushapp::Remote
   #
   def update!
     Pushapp::Hook.new(self).setup
-  end  
+  end
 
   def exec cmd
     if host
-      Kernel.exec "ssh -t #{user}@#{host} '#{cmd}'"
+      Kernel.exec "ssh -t #{user}@#{host} '#{Shellwords.escape(cmd)}'"
     else
       Kernel.exec cmd
     end
   end
 
+  def env_run cmd
+    if host
+      Pushapp::Pipe.run "ssh #{user}@#{host} 'cd #{path} && #{shell_env} $SHELL -l \'#{Shellwords.escape(cmd)}\'"
+    else
+      Bundler.with_original_env do
+        Pushapp::Pipe.run "cd #{path} && #{shell_env} #{cmd}"
+      end
+    end
+  end
+
   def run cmd
     if host
-      Pipe.run "ssh #{user}@#{host} '#{cmd}'"
+      Pushapp::Pipe.run "ssh #{user}@#{host} '#{Shellwords.escape(cmd)}'"
     else
-      Pipe.run cmd
+      Bundler.with_original_env do
+        Pushapp::Pipe.run cmd
+      end
     end
   end
 

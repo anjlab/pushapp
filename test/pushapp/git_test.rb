@@ -8,6 +8,6 @@ class GitTest < MiniTest::Unit::TestCase
   end
 
   def test_it_list_repos
-    
+
   end
 end

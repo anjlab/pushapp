@@ -4,7 +4,7 @@ PAP_REMOTE="<%= @remote.full_name %>";
 export PAP_PRE="<%= prefix %>";
 
 
-<%= echo "[pushapp] ENTERING POST RECEIVE HOOK FOR: #{@remote.full_name}" %>
+<%= info "ENTERING POST RECEIVE HOOK FOR: #{@remote.full_name}" %>
 
 cd ..
 GIT_DIR='.git'

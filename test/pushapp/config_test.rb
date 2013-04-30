@@ -7,7 +7,7 @@ class ConfigTest < MiniTest::Unit::TestCase
   def setup
     @config = Pushapp::Config.new
   end
-  
+
   def test_takes_the_path_of_the_config_file_as_an_argument
     config = Pushapp::Config.new('/some/where/config.rb')
     assert_equal '/some/where/config.rb', config.file
@@ -58,7 +58,7 @@ class ConfigTest < MiniTest::Unit::TestCase
     @config.remote :prod, 'app@host:/home/app/app-prod'
 
     @config.on :setup do
-      rake 'db:create db:migrate db:seed'      
+      rake 'db:create db:migrate db:seed'
     end
 
     @config.on :update do

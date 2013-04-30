@@ -4,7 +4,7 @@ module Pushapp
   module Tasks
     class Rake < Script
       def cmd
-        [env, "rake", script.to_s]
+        [env, "rake #{script}"]
       end
 
       def inspect
