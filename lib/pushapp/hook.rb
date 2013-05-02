@@ -92,6 +92,7 @@ module Pushapp
       # debug "Copying hook for #{@remote.name} to #{@remote.location}"
       copy_hook
       set_hook_permissions
+      set_setup_flag
     end
 
     def generate_hook
@@ -106,6 +107,10 @@ module Pushapp
 
     def set_hook_permissions
       @remote.run "#{make_hook_executable}"
+    end
+
+    def set_setup_flag
+      @remote.run "touch .git/.pushapp.setup.flag"
     end
 
     def copy_hook
