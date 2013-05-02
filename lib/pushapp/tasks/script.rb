@@ -15,14 +15,6 @@ module Pushapp
         [env, script]
       end
 
-      def env
-        Hash[env_options.map {|k, v| [k.to_s, v.to_s] }]
-      end
-
-      def env_options
-        options[:env] || {}
-      end
-
       def inspect
         "script: #{script}"
       end

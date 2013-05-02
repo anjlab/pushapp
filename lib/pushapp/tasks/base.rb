@@ -15,6 +15,26 @@ module Pushapp
       def run
       end
 
+      def env
+        Hash[env_options.map {|k, v| [k.to_s, v.to_s] }]
+      end
+
+      def env_options
+        options[:env] || {}
+      end
+
+      def sudo
+        options[:sudo] || 'sudo'
+      end
+
+      def system cmd
+        Pipe.run cmd
+      end
+
+      def app_name_from_path
+        options[:remote].path ? options[:remote].path.split('/').last : nil
+      end
+
       def self.register_as name
         Pushapp::Config.register_task name, self
       end
