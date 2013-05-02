@@ -2,19 +2,18 @@ require 'pushapp/tasks/base'
 
 module Pushapp
   module Tasks
-    class UnicornRestart < Base
+    class UnicornSignal < Base
       def run
         pid = unicorn_pid
         if pid
           logger.info "sending #{unicorn_signal} to pid at #{unicorn_pid_file}"
-          system "cp -f #{unicorn_pid_file} #{unicorn_pid_file}.oldpid"
           system "#{sudo} kill -#{unicorn_signal} #{unicorn_pid}"
         else
           logger.warn "can't find unicorn pid at '#{unicorn_pid_file}'"
         end
       end
 
-      register_as :unicorn_restart
+      register_as :unicorn_signal
 
       private
 
