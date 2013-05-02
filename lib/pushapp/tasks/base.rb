@@ -28,6 +28,7 @@ module Pushapp
       end
 
       def system cmd
+        logger.debug cmd
         Pipe.run cmd
       end
 

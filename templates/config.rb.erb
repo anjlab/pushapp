@@ -2,6 +2,7 @@
 require 'pushapp/tasks/upstart'
 require 'pushapp/tasks/nginx_export'
 require 'pushapp/tasks/foreman_export'
+require 'pushapp/tasks/unicorn_signal'
 
 # Sample remote definition:
 #
@@ -20,18 +21,20 @@ require 'pushapp/tasks/foreman_export'
 #     worker: true
 # end
 
-remote 'production', 'app@server3:/home/app/app', env: {RAILS_ENV: 'production'}
+remote 'production', 'app@server3:/home/app/app',
+  upstart_jobs: ['worker']
+  env: {RAILS_ENV: 'production'}
 
 on :setup do
   task :nginx_export
   rake('db:create db:migrate db:seed')
   rake('precompile:assets', env: {RAILS_GROUP: :assets})
   task(:foreman_export)
-  task(:upstart_restart)
 end
 
 on :push do
   rake('db:migrate')
   rake('precompile:assets', env: {RAILS_GROUP: :assets})
-  task(:upstart_restart)
+  task(:upstart_restart) # restarting options[:upstart_jobs]
+  task(:unicorn_signal)  # sending HUP signal to unicorn
 end
