@@ -1,4 +1,4 @@
-if [ -s ".git/.pushapp.setup.flag" ]; then
+if [ -f ".git/.pushapp.setup.flag" ]; then
   bundle exec pushapp trigger setup $PAP_REMOTE --local true <%= colorize %>
   rm ".git/.pushapp.setup.flag"
 fi
