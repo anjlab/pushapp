@@ -45,7 +45,7 @@ module Pushapp
 
     class UpstartRestart < Upstart
       def run_on job
-        system "#{sudo} initctl start #{job} || initctl restart #{job}"
+        system "#{sudo} initctl start #{job} || #{sudo} initctl restart #{job}"
       end
 
       register_as :upstart_restart
@@ -53,7 +53,7 @@ module Pushapp
 
     class UpstartReload < Upstart
       def run_on job
-        system "#{sudo} initctl start #{job} || initctl restart #{job}"
+        system "#{sudo} initctl start #{job} || #{sudo} initctl restart #{job}"
       end
 
       register_as :upstart_reload
