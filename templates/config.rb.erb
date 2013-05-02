@@ -28,13 +28,13 @@ remote 'production', 'app@server3:/home/app/app',
 on :setup do
   task :nginx_export
   rake('db:create db:migrate db:seed')
-  rake('precompile:assets', env: {RAILS_GROUP: :assets})
+  rake('assets:precompile', env: {RAILS_GROUP: :assets})
   task(:foreman_export)
 end
 
 on :push do
   rake('db:migrate')
-  rake('precompile:assets', env: {RAILS_GROUP: :assets})
+  rake('assets:precompile', env: {RAILS_GROUP: :assets})
   task(:upstart_restart) # restarting options[:upstart_jobs]
   task(:unicorn_signal)  # sending HUP signal to unicorn
 end
