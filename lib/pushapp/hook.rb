@@ -110,7 +110,7 @@ module Pushapp
     end
 
     def set_setup_flag
-      @remote.run "touch .git/.pushapp.setup.flag"
+      @remote.run "touch #{@remote.path}/.git/.pushapp.setup.flag"
     end
 
     def copy_hook
