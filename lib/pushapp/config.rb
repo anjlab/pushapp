@@ -1,5 +1,12 @@
 require 'pushapp/remote'
+
 require 'pushapp/tasks/base'
+require 'pushapp/tasks/script'
+require 'pushapp/tasks/rake'
+require 'pushapp/tasks/upstart'
+require 'pushapp/tasks/nginx_export'
+require 'pushapp/tasks/foreman_export'
+require 'pushapp/tasks/unicorn_signal'
 
 class Pushapp::Config
 

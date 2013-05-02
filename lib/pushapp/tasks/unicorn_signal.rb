@@ -22,7 +22,7 @@ module Pushapp
       end
 
       def unicorn_pid_file
-        options[:unicorn_pid_file] || "tmp/pids/unicorn.pid"
+        options[:unicorn_pid_file] || 'tmp/pids/unicorn.pid'
       end
 
       def unicorn_signal

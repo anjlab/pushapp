@@ -15,31 +15,31 @@ module Pushapp
 
     def init
       logger.info "Creating an example config file in #{Pushapp::DEFAULT_CONFIG_LOCATION}"
-      logger.info "Customize it to your needs"
+      logger.info 'Customize it to your needs'
       create_config_directory
       write_config_file
     end
 
     def update_refs
-      logger.info "Updating .git/config. Setting up refs to all remotes"
+      logger.info 'Updating .git/config. Setting up refs to all remotes'
       Pushapp::Git.new.update_tracked_repos(config)
     end
 
     def list_remotes
-      logger.info "Known remotes:"
+      logger.info 'Known remotes:'
       remotes_table = config.remotes.map {|r| [r.full_name, r.location, r.env]}
       remotes_table.unshift ['Full Name', 'Location', 'ENV']
       logger.shell.print_table(remotes_table)
     end
 
     def setup
-      logger.info "Setting up remotes"
+      logger.info 'Setting up remotes'
       remotes.each { |r| r.setup! }
       update
     end
 
     def update
-      logger.info "Updating remotes"
+      logger.info 'Updating remotes'
       remotes.each { |r| r.update! }
     end
 
@@ -63,7 +63,7 @@ module Pushapp
         logger.info "STARTING TASKS ON EVENT #{event}"
         remotes.each do |r|
           r.tasks_on(event).each do |t|
-            logger.info "run: #{t.inspect}"
+            logger.info "task: #{t.inspect}"
             Pushapp::Pipe.run(t)
           end
         end
