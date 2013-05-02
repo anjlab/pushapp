@@ -2,7 +2,7 @@
 require 'pushapp/tasks/upstart'
 require 'pushapp/tasks/nginx_export'
 require 'pushapp/tasks/foreman_export'
-require 'pushapp/tasks/unicorn_signal'
+require 'pushapp/tasks/unicorn_restart'
 
 # Sample remote definition:
 #
@@ -36,5 +36,5 @@ on :push do
   rake('db:migrate')
   rake('assets:precompile', env: {RAILS_GROUP: :assets})
   task(:upstart_restart) # restarting options[:upstart_jobs]
-  task(:unicorn_signal)  # sending HUP signal to unicorn
+  task(:unicorn_restart)  # sending USR2 signal to unicorn
 end
