@@ -2,7 +2,7 @@ require 'pushapp/tasks/base'
 
 module Pushapp
   module Tasks
-    class NginxExport < Nginx
+    class NginxExport < Base
       def run
         system "#{sudo} cp #{nginx_conf} #{nginx_sites}"
 
