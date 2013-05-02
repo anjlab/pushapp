@@ -32,5 +32,5 @@ on :push do
   rake('db:migrate')
   rake('assets:precompile', env: {RAILS_GROUP: :assets})
   task(:upstart_restart) # restarting options[:upstart_jobs]
-  task(:unicorn_restart)  # sending USR2 signal to unicorn
+  task(:unicorn_signal)  # sending USR2 signal to unicorn
 end
