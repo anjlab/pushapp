@@ -60,7 +60,7 @@ module Pushapp
       event = @options[:event]
       local = @options[:local]
       if local
-        logger.info "Starting tasks on #{event} event"
+        logger.info "STARTING TASKS ON EVENT #{event}"
         remotes.each do |r|
           r.tasks_on(event).each do |t|
             logger.info "run: #{t.inspect}"
