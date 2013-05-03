@@ -1,6 +1,7 @@
 site 'http://community.opscode.com/api/v1'
 
 cookbook 'apt'
+cookbook 'memcached'
 <% if options[:database] == 'mysql' %>
 cookbook 'mysql', {}
 <% elsif options[:database] == 'postgresql' %>

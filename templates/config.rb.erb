@@ -17,7 +17,7 @@
 #     worker: true
 # end
 
-remote 'production', 'app@server3:/home/app/app',
+remote :production, 'app@server3:/home/app/app',
   upstart_jobs: ['worker']
   env: {RAILS_ENV: 'production'}
 

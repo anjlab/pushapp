@@ -11,6 +11,22 @@ module Pushapp
     class_option :file, default: Pushapp::DEFAULT_CONFIG_LOCATION,
       type: :string, aliases: '-f', banner: 'Specify a pushapp configuration file'
 
+    desc 'web REMOTE', 'generates all configs for REMOTE web (nginx, unicorn and gems)'
+    def web(remote)
+      options[:remote]
+      options[:listen] = "80"
+
+      uncomment_lines 'Gemfile', /gem 'unicorn'/
+      uncomment_lines 'Gemfile', /gem 'therubyracer'/
+      insert_into_file 'Gemfile', "\ngem 'pushapp'\ngem 'foreman'\ngem 'foreman'\ngem 'dotenv-rails'", after: /gem 'unicorn'/
+      unicorn_upstart
+      unicorn_nginx(remote)
+      unicorn(remote)
+
+      template 'Procfile'
+      template '.env.erb', ".env.#{app_env}"
+    end
+
     desc 'unicorn-nginx REMOTE', 'generates nginx config for unicorn'
     method_option :host, desc: 'Nginx host, will use remote host as default.'
     method_option :env,  desc: 'unicorn env, will use remote RAILS_ENV as default.'
@@ -214,30 +230,31 @@ module Pushapp
 
     def run_list
       [
-        "apt",
-        "chef-solo-search",
-        "locale",
-        "users::sysadmins",
-        "sudo",
-        "runit",
-        mysql? ? "mysql::server" : nil,
-        postgresql? ? "postgresql::server" : nil,
-        "imagemagick",
-        "ruby_build",
-        "rbenv::user",
-        "nginx::repo",
-        "nginx",
-        "git"
+        'apt',
+        'chef-solo-search',
+        'locale',
+        'users::sysadmins',
+        'sudo',
+        'runit',
+        'memcached',
+        mysql? ? 'mysql::server' : nil,
+        postgresql? ? 'postgresql::server' : nil,
+        'imagemagick',
+        'ruby_build',
+        'rbenv::user',
+        'nginx::repo',
+        'nginx',
+        'git'
       ].compact
     end
 
     def user_json
       {
         id:        app_user,
-        comment:   "Application User",
+        comment:   'Application User',
         ssh_keys:  [File.read(options[:ssh_pub_key])],
-        groups:    ["sysadmin", "sudo", "staff"],
-        shell:     "/bin/bash"
+        groups:    %w{sysadmin sudo staff},
+        shell:     '/bin/bash'
       }
     end
 
