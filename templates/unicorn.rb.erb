@@ -2,7 +2,7 @@
 #
 # See http://unicorn.bogomips.org/Unicorn/Configurator.html for complete
 # documentation.
-env ||= ENV["RACK_ENV"] || "development"
+env ||= ENV['RACK_ENV'] || 'development'
 root = File.expand_path('../..', __FILE__)
 # Use at least one worker per core if you're on a dedicated server,
 # more will usually help for _short_ waits on databases/caches.

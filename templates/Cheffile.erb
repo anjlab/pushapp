@@ -1,17 +1,17 @@
 site 'http://community.opscode.com/api/v1'
 
-cookbook "apt"
+cookbook 'apt'
 <% if options[:database] == 'mysql' %>
-cookbook "mysql", {}
+cookbook 'mysql', {}
 <% elsif options[:database] == 'postgresql' %>
-cookbook "postgresql", {}
+cookbook 'postgresql', {}
 <% end %>
-cookbook "sudo", {:gihub => "patcon/chef-sudo"}
-cookbook "locale", {:github => "yury/hw-chef-locale"}
-cookbook "imagemagick"
-cookbook "chef-solo-search", {:github => "edelight/chef-solo-search"}
-cookbook "users"
-cookbook "ruby_build", {:github=>"fnichol/chef-ruby_build", :ref=>"v0.7.2"}
-cookbook "rbenv", {:github=>"fnichol/chef-rbenv"}
-cookbook "nginx", {:github=> "opscode-cookbooks/nginx"}
-cookbook "git", {}
+cookbook 'sudo', {:gihub => 'patcon/chef-sudo'}
+cookbook 'locale', {:github => 'yury/hw-chef-locale'}
+cookbook 'imagemagick'
+cookbook 'chef-solo-search', {:github => 'edelight/chef-solo-search'}
+cookbook 'users'
+cookbook 'ruby_build', {:github => 'fnichol/chef-ruby_build', :ref=>'v0.7.2'}
+cookbook 'rbenv', {:github => 'fnichol/chef-rbenv'}
+cookbook 'nginx', {:github => 'opscode-cookbooks/nginx'}
+cookbook 'git', {}

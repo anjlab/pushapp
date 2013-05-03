@@ -13,27 +13,27 @@ module Pushapp
 
     desc 'unicorn-nginx REMOTE', 'generates nginx config for unicorn'
     method_option :host, desc: 'Nginx host, will use remote host as default.'
-    method_option :env,  desc: "unicorn env, will use remote RAILS_ENV as default."
-    method_option :listen, default: '80', desc: "Nginx port to listen. Default: 80"
+    method_option :env,  desc: 'unicorn env, will use remote RAILS_ENV as default.'
+    method_option :listen, default: '80', desc: 'Nginx port to listen. Default: 80'
 
     def unicorn_nginx(remote)
       options[:remote] = remote
       template 'unicorn_nginx.conf.erb', "config/deploys/#{app_name}.nginx.conf"
     end
 
-    desc "unicorn-upstart", "generates unicorn binary for upstart/foreman"
+    desc 'unicorn-upstart', 'generates unicorn binary for upstart/foreman'
     def unicorn_upstart
       template 'unicorn_upstart.erb', 'bin/unicorn_upstart'
       chmod 'bin/unicorn_upstart', 'a+x'
     end
 
-    desc "unicorn REMOTE", "generates unicorn config"
+    desc 'unicorn REMOTE', 'generates unicorn config'
     def unicorn(remote)
       options[:remote] = remote
       template 'unicorn.rb.erb', 'config/unicorn.rb'
     end
 
-    desc "chef-solor REMOTE", "generates chef-solor with knife-solo configs"
+    desc 'chef-solor REMOTE', 'generates chef solo with knife solo configs'
     method_option :database,
       type: :string,
       default: 'postgresql',
@@ -46,11 +46,11 @@ module Pushapp
 
     method_option :vagrant_box,
       type: :string,
-      default: "opscode_ubuntu-12.04-i386_chef-11.4.4"
+      default: 'opscode_ubuntu-12.04-i386_chef-11.4.4'
 
     method_option :vagrant_box_url,
       type: :string,
-      default: "https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04-i386_chef-11.4.4.box"
+      default: 'https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04-i386_chef-11.4.4.box'
 
     method_option :db_password,
       type: :string,
@@ -65,6 +65,7 @@ module Pushapp
 
       template 'Cheffile.erb',    'config/deploys/chef/Cheffile'
       template 'Vagrantfile.erb', 'config/deploys/chef/Vagrantfile'
+      template 'solo.rb.erb',     'config/deploys/chef/solo.rb'
       template 'node.json.erb',   "config/deploys/chef/nodes/#{app_host}.json"
       template 'user.json.erb',   "config/deploys/chef/data_bags/users/#{app_user}.json"
 

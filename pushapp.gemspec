@@ -6,8 +6,8 @@ require 'pushapp/version'
 Gem::Specification.new do |spec|
   spec.name          = 'pushapp'
   spec.version       = Pushapp::VERSION
-  spec.authors       = ["Yury Korolev"]
-  spec.email         = ["yurykorolev@me.com"]
+  spec.authors       = ['Yury Korolev']
+  spec.email         = ['yurykorolev@me.com']
   spec.description   = %q{Push your App}
   spec.summary       = %q{Push your App}
   spec.homepage      = 'https://github.com/anjlab/pushapp'
