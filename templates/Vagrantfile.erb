@@ -1,0 +1,20 @@
+# encoding: utf-8
+
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant::Config.run do |config|
+
+  config.vm.box = "<%= options[:vagrant_box] %>"
+  config.vm.box_url = "<%= options[:vagrant_box_url] %>"
+  # config.ssh.forward_agent = true
+
+  config.vm.provision :chef_solo do |chef|
+    chef.cookbooks_path = ["cookbooks"]
+    chef.data_bags_path = "data_bags"
+    <% run_list.each do |recipe| -%>
+    chef.add_recipe '<%= recipe %>'
+    <% end -%>
+    chef.json = <%= AwesomePrint::Inspector.new(plain: true, index: false, indent: -2).awesome(vagrant_config).gsub("\n", "\n    ") %>
+  end
+end

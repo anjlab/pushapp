@@ -1,0 +1,23 @@
+#!/bin/bash
+
+if [ -f tmp/pids/unicorn.pid ]; then
+  unicorn_pid_file=tmp/pids/unicorn.pid
+  # Someone restarted the master; wait for the new master to exit.
+  PID=`cat $unicorn_pid_file`
+
+  while kill -0 $PID; do
+    sleep 2
+    PID=`cat $unicorn_pid_file`
+  done
+
+  # If we get here, the master has exited, either because someone restarted
+  # it again (in which case there's already a new master running), or
+  # it died for real (in which case we'll need to start a new process).
+  # The sleep above is a tradeoff between polling load and mimizing the
+  # restart delay when the master dies for real (which should hopefully be
+  # rare).
+  rm $unicorn_pid_file
+else
+  # Run the unicorn master process (this won't return until it exits).
+  bundle exec unicorn -E $RAILS_ENV -c config/unicorn.rb
+fi

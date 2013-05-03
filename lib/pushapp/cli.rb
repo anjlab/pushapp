@@ -1,5 +1,6 @@
 require 'thor'
 require 'pushapp/commands'
+require 'pushapp/generators'
 
 module Pushapp
   class CLI < Thor
@@ -66,5 +67,8 @@ module Pushapp
     def ssh(remote=nil)
       Pushapp::Commands.run(:ssh, remote: remote, options: options)
     end
+
+    desc "generate MODULE REMOTE", "bootstrapp app with varios optimizaed configs"
+    subcommand "generate", Generators
   end
 end
