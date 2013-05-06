@@ -49,7 +49,7 @@ module Pushapp
       template 'unicorn.rb.erb', 'config/unicorn.rb'
     end
 
-    desc 'chef-solor REMOTE', 'generates chef solo with knife solo configs'
+    desc 'chef-solo REMOTE', 'generates chef solo with knife solo configs'
     method_option :database,
       type: :string,
       default: 'postgresql',
