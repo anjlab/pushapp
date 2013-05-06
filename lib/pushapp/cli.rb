@@ -29,14 +29,6 @@ module Pushapp
       Pushapp::Commands.run(:update_refs, options: options)
     end
 
-    desc 'update REMOTES', 'Re-Generate and upload hook based on current configuration'
-
-    method_option :file, type: :string, aliases: '-f', banner: 'Specify a configuration file'
-
-    def update(*remotes)
-      Pushapp::Commands.run(:update, remotes: remotes, options: options)
-    end
-
     desc 'remotes', 'List all known remotes'
 
     method_option :file, type: :string, aliases: '-f', banner: 'Specify a configuration file'

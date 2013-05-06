@@ -71,12 +71,6 @@ class Pushapp::Remote
   #
   def setup!
     run "#{init_repository} && #{setup_repository}"
-  end
-
-  #
-  # Update git remote and hook
-  #
-  def update!
     Pushapp::Hook.new(self).setup
   end
 

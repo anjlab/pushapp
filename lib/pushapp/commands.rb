@@ -35,12 +35,7 @@ module Pushapp
     def setup
       logger.info 'Setting up remotes'
       remotes.each { |r| r.setup! }
-      update
-    end
-
-    def update
-      logger.info 'Updating remotes'
-      remotes.each { |r| r.update! }
+      update_refs
     end
 
     def tasks
