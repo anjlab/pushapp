@@ -5,6 +5,7 @@ module Pushapp
     attr_reader :logger
 
     def self.run(command, options = {})
+      $stdout.sync = true
       self.new(options.merge({ command: command })).send(command)
     end
 
