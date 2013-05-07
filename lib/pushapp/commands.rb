@@ -5,7 +5,6 @@ module Pushapp
     attr_reader :logger
 
     def self.run(command, options = {})
-      $stdout.sync = true
       self.new(options.merge({ command: command })).send(command)
     end
 
@@ -56,6 +55,7 @@ module Pushapp
       event = @options[:event]
       local = @options[:local]
       if local
+        $stdout.sync = $stderr.sync = true
         logger.info "STARTING TASKS ON EVENT #{event}"
         remotes.each do |r|
           r.tasks_on(event).each do |t|

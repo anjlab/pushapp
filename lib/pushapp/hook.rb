@@ -67,7 +67,7 @@ module Pushapp
     end
 
     def colorize
-      %{2>&1 | ruby -pe '$_="#{pre}#\{$_\}"'}
+      %{2>&1 | ruby -e '$stdout.sync = $stderr.sync = true' -pe '$_="#{pre}#\{$_\}"'}
     end
 
     def info message
