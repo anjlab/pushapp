@@ -18,7 +18,7 @@
 # end
 
 remote :production, 'app@server3:/home/app/app',
-  upstart_jobs: ['worker']
+  upstart_jobs: ['worker'],
   env: {RAILS_ENV: 'production'}
 
 on :setup do
