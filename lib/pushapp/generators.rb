@@ -130,30 +130,30 @@ module Pushapp
     def postgresql_config
       {
         config: {
-          listen_addresses: "*",
-          port: "5432"
+          listen_addresses: '*',
+          port: '5432'
         },
         pg_hba: [
           {
-            type:   "local",
-            db:     "postgres",
-            user:   "postgres",
+            type:   'local',
+            db:     'postgres',
+            user:   'postgres',
             addr:   nil,
-            method: "trust"
+            method: 'trust'
           },
           {
-            type:   "host",
-            db:     "all",
-            user:   "all",
-            addr:   "0.0.0.0/0",
-            method: "md5"
+            type:   'host',
+            db:     'all',
+            user:   'all',
+            addr:   '0.0.0.0/0',
+            method: 'md5'
           },
           {
-            type:   "host",
-            db:     "all",
-            user:   "all",
-            addr:   "::1/0",
-            method: "md5"
+            type:   'host',
+            db:     'all',
+            user:   'all',
+            addr:   '::1/0',
+            method: 'md5'
           }
         ],
         password: {
@@ -167,17 +167,17 @@ module Pushapp
         :server_root_password   => options[:db_password],
         :server_repl_password   => options[:db_password],
         :server_debian_password => options[:db_password],
-        :service_name           => "mysql",
-        :basedir                => "/usr",
-        :data_dir               => "/var/lib/mysql",
-        :root_group             => "root",
-        :mysqladmin_bin         => "/usr/bin/mysqladmin",
-        :mysql_bin              => "/usr/bin/mysql",
-        :conf_dir               => "/etc/mysql",
-        :confd_dir              => "/etc/mysql/conf.d",
-        :socket                 => "/var/run/mysqld/mysqld.sock",
-        :pid_file               => "/var/run/mysqld/mysqld.pid",
-        :grants_path            => "/etc/mysql/grants.sql"
+        :service_name           => 'mysql',
+        :basedir                => '/usr',
+        :data_dir               => '/var/lib/mysql',
+        :root_group             => 'root',
+        :mysqladmin_bin         => '/usr/bin/mysqladmin',
+        :mysql_bin              => '/usr/bin/mysql',
+        :conf_dir               => '/etc/mysql',
+        :confd_dir              => '/etc/mysql/conf.d',
+        :socket                 => '/var/run/mysqld/mysqld.sock',
+        :pid_file               => '/var/run/mysqld/mysqld.pid',
+        :grants_path            => '/etc/mysql/grants.sql'
       }
     end
 
@@ -193,15 +193,15 @@ module Pushapp
     def common_config
       cfg = {
         nginx: {
-          dir: "/etc/nginx",
-          log_dir: "/var/log/nginx",
-          binary: "/usr/sbin/nginx",
-          user: "www-data",
-          pid: "/var/run/nginx.pid",
-          worker_connections: "1024"
+          dir:     '/etc/nginx',
+          log_dir: '/var/log/nginx',
+          binary:  '/usr/sbin/nginx',
+          user:    'www-data',
+          pid:     '/var/run/nginx.pid',
+          worker_connections: '1024'
         },
         git: {
-          prefix: "/usr/local"
+          prefix: '/usr/local'
         },
       }
       cfg[:mysql] = mysql_config if mysql?
@@ -266,9 +266,9 @@ module Pushapp
           user: user,
           rubies: [ options[:ruby] ],
           global: options[:ruby],
-          environment: { CFLAGS: "-march=native -O2 -pipe" },
+          environment: { CFLAGS: '-march=native -O2 -pipe' },
           gems: {
-            options[:ruby] => [{name: "bundler", version: "1.3.5"}]
+            options[:ruby] => [{name: 'bundler', version: '1.3.5'}]
           }
         }]
       }
