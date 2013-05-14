@@ -19,7 +19,7 @@ module Pushapp
 
       uncomment_lines 'Gemfile', /gem 'unicorn'/
       uncomment_lines 'Gemfile', /gem 'therubyracer'/
-      insert_into_file 'Gemfile', "\ngem 'pushapp'\ngem 'foreman'\ngem 'foreman'\ngem 'dotenv-rails'", after: /gem 'unicorn'/
+      insert_into_file 'Gemfile', "\ngem 'pushapp'\ngem 'foreman'\ngem 'dotenv-rails'", after: /gem 'unicorn'/
       unicorn_upstart
       unicorn_nginx(remote)
       unicorn(remote)
