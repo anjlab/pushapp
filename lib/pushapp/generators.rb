@@ -5,6 +5,7 @@ require 'json'
 module Pushapp
   class Generators < Thor
     include Thor::Actions
+    namespace :generate
 
     source_root Pushapp::TEMPLATE_ROOT
 
