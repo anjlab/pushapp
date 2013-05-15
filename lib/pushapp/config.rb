@@ -15,6 +15,7 @@ class Pushapp::Config
     require 'pushapp/tasks/nginx_export'
     require 'pushapp/tasks/foreman_export'
     require 'pushapp/tasks/unicorn_signal'
+    require 'pushapp/tasks/whenever_update'
 
     config = self.new(configuration_file)
     config.instance_eval(File.read(config.file))
