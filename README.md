@@ -14,7 +14,15 @@ Add this line to your application's Gemfile:
 
 add ./vendor/bundle to .gitignore
 
-TODO: Write usage instructions here
+## Supported tasks
+
+ - :unicorn_signal - sends USR2 signal to tmp/pids/unicorn.pid
+ - :foreman_export - foreman export (upstart is default)
+ - :upstart_start - start upstart job
+ - :upstart_stop - stop upstart job
+ - :upstart_restart - restart upstart job
+ - :whenever_update - whenever update (crontab)
+ - :nginx_export - copy nginx site config to nginx/sites_enabled
 
 ## Contributing
 
