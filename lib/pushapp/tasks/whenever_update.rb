@@ -5,7 +5,7 @@ module Pushapp
     class WheneverUpdate < Base
 
       def run
-        system "#{sudo} bundle exec whenever --update-crontab #{whenever_app} --set #{variables}"
+        system "bundle exec whenever --update-crontab #{whenever_app} --set #{variables}"
       end
 
       private
