@@ -129,12 +129,12 @@ module Pushapp
 
     def postgresql_config
       {
-        "users": [
+        :users => [
           {
-            "username": app_user,
-            "superuser": true,
-            "createdb": true,
-            "login": true
+            :username => app_user,
+            :superuser => true,
+            :createdb => true,
+            :login => true
           }
         ]
       }
