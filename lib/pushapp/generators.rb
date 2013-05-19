@@ -48,6 +48,7 @@ module Pushapp
     def unicorn(remote)
       options[:remote] = remote
       template 'unicorn.rb.erb', 'config/unicorn.rb'
+      puts "NOTE: add tmp/pids to your git repo. ( touch tmp/pids/.keep && git add tmp/pids/.keep -f )"
     end
 
     desc 'chef-solo REMOTE', 'generates chef solo with knife solo configs'
