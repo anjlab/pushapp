@@ -129,36 +129,14 @@ module Pushapp
 
     def postgresql_config
       {
-        config: {
-          listen_addresses: '*',
-          port: '5432'
-        },
-        pg_hba: [
+        "users": [
           {
-            type:   'local',
-            db:     'postgres',
-            user:   'postgres',
-            addr:   nil,
-            method: 'trust'
-          },
-          {
-            type:   'host',
-            db:     'all',
-            user:   'all',
-            addr:   '0.0.0.0/0',
-            method: 'md5'
-          },
-          {
-            type:   'host',
-            db:     'all',
-            user:   'all',
-            addr:   '::1/0',
-            method: 'md5'
+            "username": app_user,
+            "superuser": true,
+            "createdb": true,
+            "login": true
           }
-        ],
-        password: {
-          postgres: options[:db_password]
-        }
+        ]
       }
     end
 
@@ -239,14 +217,14 @@ module Pushapp
         'runit',
         'memcached',
         mysql? ? 'mysql::server' : nil,
-        postgresql? ? 'postgresql::server' : nil,
+        postgresql? ? ['postgresql::server', 'postgresql::contrib'] : nil,
         'imagemagick',
         'ruby_build',
         'rbenv::user',
         'nginx::repo',
         'nginx',
         'git'
-      ].compact
+      ].flatten.compact
     end
 
     def user_json

@@ -5,7 +5,7 @@ cookbook 'memcached'
 <% if options[:database] == 'mysql' %>
 cookbook 'mysql', {}
 <% elsif options[:database] == 'postgresql' %>
-cookbook 'postgresql', {}
+cookbook 'postgresql', {:github => 'phlipper/chef-postgresql'}
 <% end %>
 cookbook 'sudo', {:gihub => 'patcon/chef-sudo'}
 cookbook 'locale', {:github => 'yury/hw-chef-locale'}
