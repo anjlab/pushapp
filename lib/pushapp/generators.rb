@@ -217,7 +217,7 @@ module Pushapp
         'runit',
         'memcached',
         mysql? ? 'mysql::server' : nil,
-        postgresql? ? ['postgresql::server', 'postgresql::contrib'] : nil,
+        postgresql? ? ['postgresql::server', 'postgresql::contrib', 'postgresql::client', 'postgresql::libpq'] : nil,
         'imagemagick',
         'ruby_build',
         'rbenv::user',
