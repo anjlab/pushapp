@@ -2,7 +2,9 @@
 
 Simple heroku like deployment system.
 
-![gitpush](https://f.cloud.github.com/assets/5250/523884/d78a70e0-c0e8-11e2-8569-09e00d48a693.gif)
+[![gitpush](https://f.cloud.github.com/assets/5250/523884/d78a70e0-c0e8-11e2-8569-09e00d48a693.gif)](http://player.vimeo.com/video/66528056)
+
+[full video](http://player.vimeo.com/video/66528056)
 
 TODO: notes on blazing
 
