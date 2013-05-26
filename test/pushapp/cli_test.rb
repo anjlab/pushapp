@@ -7,20 +7,16 @@ class CLITest < MiniTest::Unit::TestCase
     @cli = Pushapp::CLI.new
   end
 
-  def test_it_has_init_method
-    @cli.respond_to? :init
-  end
-
-  def test_it_has_setup_method
-    @cli.respond_to? :setup
-  end
-
-  def test_it_has_update_method
-    @cli.respond_to? :update
-  end
-
-  def test_it_has_help_method
-    @cli.respond_to? :help
+  def test_cli_protocol
+    assert @cli.respond_to?(:init)
+    assert @cli.respond_to?(:setup)
+    assert @cli.respond_to?(:remotes)
+    assert @cli.respond_to?(:tasks)
+    assert @cli.respond_to?(:trigger)
+    assert @cli.respond_to?(:ssh)
+    assert @cli.respond_to?(:generate)
+    assert @cli.respond_to?(:update_refs)
+    assert @cli.respond_to?(:help)
   end
 
 end
