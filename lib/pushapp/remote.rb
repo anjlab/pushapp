@@ -129,7 +129,7 @@ class Pushapp::Remote
   end
 
   def merge_options task_options={}
-    Pushapp.rmerge(options, task_options).merge(remote: self)
+    Pushapp.rmerge(task_options, options).merge(remote: self)
   end
 
 end
