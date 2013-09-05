@@ -14,13 +14,14 @@ server {
 
   root <%=app_path%>/public;
 
-  location /assets {
+  location ~ ^/(assets|system)/ {
     location ~ \.(js|css|otf|ttf|eot|woff|svg)$ {
       gzip_static on; # to serve pre-gzipped version
     }
 
     expires max;
     add_header Cache-Control public;
+    break;
   }
 
   try_files $uri/index.html $uri.html $uri @app;
