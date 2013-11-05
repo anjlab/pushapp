@@ -83,7 +83,7 @@ module Pushapp
 
       template 'Cheffile.erb',    'config/deploys/chef/Cheffile'
       template 'Vagrantfile.erb', 'config/deploys/chef/Vagrantfile'
-      template 'solo.rb.erb',     'config/deploys/chef/solo.rb'
+      template 'knife.rb.erb',    'config/deploys/chef/.chef/knife.rb'
       template 'node.json.erb',   "config/deploys/chef/nodes/#{app_host}.json"
       template 'user.json.erb',   "config/deploys/chef/data_bags/users/#{app_user}.json"
 
