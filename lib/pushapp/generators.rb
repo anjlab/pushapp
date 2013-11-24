@@ -76,7 +76,7 @@ module Pushapp
 
     method_option :ruby,
       type: :string,
-      default: '2.0.0-p247'
+      default: '2.0.0-p353'
 
     def chef_solo(remote)
       options[:remote] = remote
