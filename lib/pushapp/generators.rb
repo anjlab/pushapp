@@ -247,7 +247,7 @@ module Pushapp
           global: options[:ruby],
           environment: { CFLAGS: '-march=native -O2 -pipe' },
           gems: {
-            options[:ruby] => [{name: 'bundler', version: '1.3.5'}]
+            options[:ruby] => [{name: 'bundler', version: '1.5.0'}]
           }
         }]
       }
