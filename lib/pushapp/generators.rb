@@ -76,7 +76,7 @@ module Pushapp
 
     method_option :ruby,
       type: :string,
-      default: '2.1.0-p0'
+      default: '2.1.0'
 
     def chef_solo(remote)
       options[:remote] = remote
@@ -109,7 +109,7 @@ module Pushapp
     end
 
     def app_env
-      remote.env['RACK_ENV'] || remote.env['RAILS_ENV'] || 'production'
+      remote.env[:RACK_ENV] || remote.env[:RAILS_ENV] || 'production'
     end
 
     def remote
