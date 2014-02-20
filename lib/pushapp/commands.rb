@@ -76,6 +76,23 @@ module Pushapp
       end
     end
 
+    def exec
+      if remote
+        cmd = (@options[:args] || []).join(' ')
+        if cmd.empty?
+          puts 'Usage: pushapp exec remote COMMAND'
+        else
+          begin
+            remote.env_run "bundle exec #{cmd}"
+          rescue Exception => e
+            puts e.message
+          end
+        end
+      else
+        logger.error 'Remote not found'
+      end
+    end
+
     private
 
     def remote
