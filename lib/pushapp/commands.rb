@@ -76,11 +76,11 @@ module Pushapp
       end
     end
 
-    def bash
+    def exec
       if remote
         cmd = (@options[:args] || []).join(' ')
         if cmd.empty?
-          puts 'Usage: pushapp bash remote COMMAND'
+          puts 'Usage: pushapp exec remote COMMAND'
         else
           begin
             remote.env_run "bundle exec #{cmd}"

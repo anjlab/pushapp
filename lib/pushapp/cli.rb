@@ -60,12 +60,12 @@ module Pushapp
       Pushapp::Commands.run(:ssh, remote: remote, options: options)
     end
 
-    desc 'bash REMOTE command', 'Run bash command remotely.'
+    desc 'exec REMOTE command', 'Run shell command remotely.'
 
     method_option :file, type: :string, aliases: '-f', banner: 'Specify a configuration file'
 
-    def bash(remote, *args)
-      Pushapp::Commands.run(:bash, remote: remote, args: args, options: options)
+    def exec(remote, *args)
+      Pushapp::Commands.run(:exec, remote: remote, args: args, options: options)
     end
 
     desc 'generate MODULE REMOTE', 'bootstrapp app with varios optimized configs'
