@@ -30,17 +30,17 @@ add ./vendor/bundle to .gitignore
  - `ssh` - SSH to remote and setup ENV vars
  - `exec` - run shell command remotely
 
- Run `pushapp help` to list all available commands and options.
+Run `pushapp help` to list all available commands and options.
 
 ## Supported tasks
 
- - :unicorn_signal - sends USR2 signal to tmp/pids/unicorn.pid
- - :foreman_export - foreman export (upstart is default)
- - :upstart_start - start upstart job
- - :upstart_stop - stop upstart job
- - :upstart_restart - restart upstart job
- - :whenever_update - whenever update (crontab)
- - :nginx_export - copy nginx site config to nginx/sites_enabled
+ - `unicorn_signal` - sends USR2 signal to tmp/pids/unicorn.pid
+ - `foreman_export` - foreman export (upstart is default)
+ - `upstart_start` - start upstart job
+ - `upstart_stop` - stop upstart job
+ - `upstart_restart` - restart upstart job
+ - `whenever_update` - whenever update (crontab)
+ - `nginx_export` - copy nginx site config to nginx/sites_enabled
 
 ## Contributing
 
