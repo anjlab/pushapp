@@ -68,7 +68,7 @@ module Pushapp
       Pushapp::Commands.run(:exec, remote: remote, args: args, options: options)
     end
 
-    desc 'generate MODULE REMOTE', 'bootstrapp app with varios optimized configs'
+    desc 'generate MODULE REMOTE', 'bootstrapp app with various optimized configs'
     subcommand 'generate', Generators
   end
 end

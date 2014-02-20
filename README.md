@@ -18,6 +18,20 @@ Add this line to your application's Gemfile:
 
 add ./vendor/bundle to .gitignore
 
+## Supported commands
+
+ - `init` - generates pushapp config file
+ - `remotes` - list all known remotes
+ - `setup` - setup group or remote repository/repositories for deployment
+ - `generate` - bootstrapp app with various optimized configs
+ - `update-refs` - setup remote refs in local .git/config
+ - `tasks` - show tasks list for remote(s)
+ - `trigger` - triggers event on remote(s)
+ - `ssh` - SSH to remote and setup ENV vars
+ - `exec` - run shell command remotely
+
+ Run `pushapp help` to list all available commands and options.
+
 ## Supported tasks
 
  - :unicorn_signal - sends USR2 signal to tmp/pids/unicorn.pid
